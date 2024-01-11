@@ -55,7 +55,7 @@ const platos = {
         { id: 40, nombre: "torta", precio: 1.5 },
         { id: 41, nombre: "quesillo", precio: 1.5 },
         { id: 42, nombre: "helado", precio: 2.0 },
-        { id: 33, nombre: "galletas", precio: 3.0 },
+        { id: 43, nombre: "galletas", precio: 3.0 },
     ],
 };
 

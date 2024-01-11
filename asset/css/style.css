@@ -1,24 +1,62 @@
-.nav-link{
+body {
+    min-height: 100vh; 
+}
+
+
+
+
+.nav-link,nav-item{
     color: black;
     text-decoration: none;
 
 }
-.nav-item{
-    color: black;
-}
+
 .saludo{
-    margin: 3%;
+    margin: 3% 0;
 }
-
-.boleta{
-    margin-top: 15%;
-}
-
-
 .cardMenu{
-    background-color: rgb(224, 221, 221);
+    background-color: #e0dddd;
 }
 
 .btn{
     margin: 5px;
+}
+
+
+.boleta {
+    display: flex;
+    position: absolute;
+   margin-top: 10%;
+    top: 10%; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+
+
+footer {
+    /* position: fixed; */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    background-color: #e0dddd;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    margin-top: 10%;
+    z-index: 2;
+}
+
+footer p, footer h4 {
+    margin: 0;
+    padding: 0;
+    color: #383c3c;
+}
+
+footer a {
+    width: 10px;
+    color: #383c3c;
 }
