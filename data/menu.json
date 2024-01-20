@@ -1,0 +1,26 @@
+{
+    "entrada": [
+        { "id": 1, "nombre": "empanadas", "precio": 3.5 },
+        { "id": 2, "nombre": "arepitas", "precio": 4.0 },
+        { "id": 3, "nombre": "pan con queso", "precio": 2.5 },
+        { "id": 4, "nombre": "facturas", "precio": 5.0 }
+    ],
+    "principal": [
+        { "id": 20, "nombre": "pasticho", "precio": 9.5 },
+        { "id": 21, "nombre": "ojo de bife", "precio": 14.0 },
+        { "id": 22, "nombre": "costillas de cerdo", "precio": 2.5 },
+        { "id": 23, "nombre": "sopa", "precio": 5.0 }
+    ],
+    "bebida": [
+        { "id": 30, "nombre": "coca cola", "precio": 1.5 },
+        { "id": 31, "nombre": "pepsi cola", "precio": 1.5 },
+        { "id": 32, "nombre": "jugo natural", "precio": 2.0 },
+        { "id": 33, "nombre": "cerveza", "precio": 3.0 }
+    ],
+    "postre": [
+        { "id": 40, "nombre": "torta", "precio": 1.5 },
+        { "id": 41, "nombre": "quesillo", "precio": 1.5 },
+        { "id": 42, "nombre": "helado", "precio": 2.0 },
+        { "id": 43, "nombre": "galletas", "precio": 3.0 }
+    ]
+}
