@@ -1,45 +1,37 @@
 // pedidos.js
+let subTotales = {};
 
-let subTotal = 0;
-let detallesPedido = [];
-
-export const eliminarProducto = (index) => {
-    // Verifica si el índice está dentro del rango válido
-    if (index >= 0 && index < detallesPedido.length) {
-        // Resta el precio del producto eliminado al subtotal
-        subTotal -= detallesPedido[index].precio;
-        // Elimina el producto del array de detalles del pedido
-        detallesPedido.splice(index, 1);
-        // Actualiza la visualización de los detalles del pedido
-        mostrarCuentaConEliminar();
+export const eliminarProducto = (index, mesaNum) => {
+    if (subTotales[mesaNum] && index >= 0 && index < subTotales[mesaNum].detallesPedido.length) {
+        subTotales[mesaNum].subTotal -= subTotales[mesaNum].detallesPedido[index].precio;
+        subTotales[mesaNum].detallesPedido.splice(index, 1);
+        mostrarCuentaConEliminar(mesaNum);
     }
 };
 
-// Función para manejar el clic en el botón de eliminar
-export const handleClickEliminar = (index) => {
-    eliminarProducto(index);
+export const handleClickEliminar = (index, mesaNum) => {
+    eliminarProducto(index, mesaNum);
 };
 
-// Función para mostrar los detalles del pedido con botones de eliminación
-export const mostrarCuentaConEliminar = () => {
-    const detallesPedidoContainer = document.getElementById('detallesPedido');
+export const mostrarCuentaConEliminar = (mesaNum) => {
+    const detallesPedidoContainer = document.getElementById(`detallesPedido-${mesaNum}`);
     detallesPedidoContainer.innerHTML = '';
 
     const ul = document.createElement('ul');
-    detallesPedido.forEach((plato, index) => {
+    subTotales[mesaNum].detallesPedido.forEach((plato, index) => {
         const li = document.createElement('li');
         li.textContent = `${plato.nombre}: $${plato.precio.toFixed(2)}`;
 
         const eliminarBtn = document.createElement('button');
         eliminarBtn.className = 'btn btn-outline-danger btn-sm';
         eliminarBtn.textContent = 'Eliminar';
-        eliminarBtn.addEventListener('click', () => handleClickEliminar(index));
+        eliminarBtn.addEventListener('click', () => handleClickEliminar(index, mesaNum));
 
         li.appendChild(eliminarBtn);
         ul.appendChild(li);
     });
 
-    const total = subTotal.toFixed(2);
+    const total = subTotales[mesaNum].subTotal.toFixed(2);
     const totalLi = document.createElement('li');
     totalLi.textContent = `Total: $${total}`;
     ul.appendChild(totalLi);
@@ -47,13 +39,16 @@ export const mostrarCuentaConEliminar = () => {
     detallesPedidoContainer.appendChild(ul);
 };
 
-
-export const agregarPlato = (tipoPlato, id, platos) => {
+export const agregarPlato = (tipoPlato, id, platos, mesaNum) => {
     const plato = obtenerOpcionPorID(tipoPlato, id, platos);
     if (plato) {
-        detallesPedido.push({ nombre: plato.nombre, precio: plato.precio });
-        subTotal += plato.precio;
-        mostrarCuentaConEliminar();
+        if (!subTotales[mesaNum]) {
+            subTotales[mesaNum] = { subTotal: 0, detallesPedido: [] };
+        }
+
+        subTotales[mesaNum].detallesPedido.push({ nombre: plato.nombre, precio: plato.precio });
+        subTotales[mesaNum].subTotal += plato.precio;
+        mostrarCuentaConEliminar(mesaNum);
     }
 };
 

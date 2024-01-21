@@ -31,7 +31,8 @@ body {
 .boleta {
     display: flex;
     position: absolute;
-    margin-top: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
     top: 10%; 
     left: 50%;
     transform: translateX(-50%);

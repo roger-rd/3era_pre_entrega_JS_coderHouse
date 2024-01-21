@@ -1,5 +1,4 @@
 // menu.js
-
 // Función para cargar los datos del archivo JSON
 export const cargarMenu = async () => {
     const jsonURL = '../data/menu.json';
