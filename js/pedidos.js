@@ -47,7 +47,6 @@ export const mostrarCuentaConEliminar = () => {
     detallesPedidoContainer.appendChild(ul);
 };
 
-// Resto del código de pedidos.js...
 
 export const agregarPlato = (tipoPlato, id, platos) => {
     const plato = obtenerOpcionPorID(tipoPlato, id, platos);

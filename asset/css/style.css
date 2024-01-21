@@ -14,9 +14,14 @@ body {
 .saludo{
     margin: 3% 0;
 }
-.cardMenu{
+.cardMenu {
     background-color: #e0dddd;
+    column-count: 2;
+    column-gap: 20px; /* Espacio entre las columnas, ajusta según sea necesario */
 }
+
+
+
 
 .btn{
     margin: 5px;
@@ -26,7 +31,7 @@ body {
 .boleta {
     display: flex;
     position: absolute;
-   margin-top: 10%;
+    margin-top: 10%;
     top: 10%; 
     left: 50%;
     transform: translateX(-50%);
