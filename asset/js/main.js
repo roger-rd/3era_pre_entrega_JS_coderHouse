@@ -1,3 +1,4 @@
+
 const jsonURL = '../data/menu.json';
 
 // Función para cargar los datos del archivo JSON
@@ -15,74 +16,121 @@ const menuJSON = async () => {
     }
 };
 
-menuJSON().then(platos =>{
 
-    if(platos){
+menuJSON().then(platos => {
+
+    if (platos) {
+
+        // Manijador de eventos para el botón "Agregar"
+        const agregarPlatoHandler = (event) => {
+            const categoria = event.target.getAttribute('data-categoria');
+            const id = parseInt(event.target.getAttribute('data-id'));
+            agregarPlato(categoria, id);
+        };
 
         // FUNCION PARA MOSTRAR EL MENU
-        document.getElementById('entrada').addEventListener('click', () => mostrarProductos('entrada'));
-        document.getElementById('principal').addEventListener('click', () => mostrarProductos('principal'));
-        document.getElementById('bebidas').addEventListener('click', () => mostrarProductos('bebida'));
-        document.getElementById('postre').addEventListener('click', () => mostrarProductos('postre'));
-
-
         const mostrarProductos = (categoria) => {
             const cardMenu = document.querySelector('.cardMenu');
             cardMenu.innerHTML = '';
 
             const productos = platos[categoria];
             productos.forEach(producto => {
-                cardMenu.innerHTML += `<p>${producto.nombre}: $${producto.precio.toFixed(2)}</p>`;
+                // Crea un elemento de botón para cada producto
+                const botonAgregar = document.createElement('button');
+                botonAgregar.className = 'btn btn-outline-secondary';
+                botonAgregar.textContent = 'Agregar';
+
+                // Usa data-* attributes para almacenar información adicional
+                botonAgregar.setAttribute('data-categoria', categoria);
+                botonAgregar.setAttribute('data-id', producto.id);
+
+                // Asigna un manejador de eventos al botón
+                botonAgregar.addEventListener('click', agregarPlatoHandler);
+
+                // Agrega el botón al DOM junto con la información del producto
+                cardMenu.appendChild(document.createElement('p')).textContent = `${producto.nombre}: $${producto.precio.toFixed(2)}`;
+                cardMenu.appendChild(botonAgregar);
             });
         };
 
-        //PARTE REALIZAR EL PEDIDO
+        // Event listener para mostrar productos
+        document.getElementById('entrada').addEventListener('click', () => mostrarProductos('entrada'));
+        document.getElementById('principal').addEventListener('click', () => mostrarProductos('principal'));
+        document.getElementById('bebidas').addEventListener('click', () => mostrarProductos('bebida'));
+        document.getElementById('postre').addEventListener('click', () => mostrarProductos('postre'));
+
+        // PARTE REALIZAR EL PEDIDO
         let subTotal = 0;
         let detallesPedido = [];
 
-        const mostrarCuenta = () => {
-            const detallesPedidoHTML = detallesPedido.map(plato => `<li>${plato.nombre}: $${plato.precio.toFixed(2)}</li>`).join("");
-            const total = subTotal.toFixed(2);
-            document.getElementById('detallesPedido').innerHTML = `<ul>${detallesPedidoHTML}<li>Total: $${total}</li></ul>`;
-        };
+        function eliminarProducto(index) {
+            // Verifica si el índice está dentro del rango válido
+            if (index >= 0 && index < detallesPedido.length) {
+                // Resta el precio del producto eliminado al subtotal
+                subTotal -= detallesPedido[index].precio;
+                // Elimina el producto del array de detalles del pedido
+                detallesPedido.splice(index, 1);
+                // Actualiza la visualización de los detalles del pedido
+                mostrarCuentaConEliminar();
+            }
+        }
 
-        document.getElementById('entradaBtn').addEventListener('click', () => agregarPlato('entrada'));
-        document.getElementById('principalBtn').addEventListener('click', () => agregarPlato('principal'));
-        document.getElementById('bebidaBtn').addEventListener('click', () => agregarPlato('bebida'));
-        document.getElementById('postreBtn').addEventListener('click', () => agregarPlato('postre'));
-        document.getElementById('mostrarCuentaBtn').addEventListener('click', mostrarCuenta);
+       // Función para manejar el clic en el botón de eliminar
+       function handleClickEliminar(index) {
+        eliminarProducto(index);
+    }
 
+// Función para mostrar los detalles del pedido con botones de eliminación
+const mostrarCuentaConEliminar = () => {
+    const detallesPedidoContainer = document.getElementById('detallesPedido');
+    detallesPedidoContainer.innerHTML = '';
 
+    const ul = document.createElement('ul');
+    detallesPedido.forEach((plato, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${plato.nombre}: $${plato.precio.toFixed(2)}`;
 
+        const eliminarBtn = document.createElement('button');
+        eliminarBtn.className = 'btn btn-outline-danger btn-sm';
+        eliminarBtn.textContent = 'Eliminar';
+        eliminarBtn.addEventListener('click', () => handleClickEliminar(index));
 
-        const agregarPlato = (tipoPlato) => {
-            const plato = obtenerOpcionPorID(tipoPlato);
+        li.appendChild(eliminarBtn);
+        ul.appendChild(li);
+    });
+
+    const total = subTotal.toFixed(2);
+    const totalLi = document.createElement('li');
+    totalLi.textContent = `Total: $${total}`;
+    ul.appendChild(totalLi);
+
+    detallesPedidoContainer.appendChild(ul);
+};
+
+        // Actualizamos la función a la versión con eliminación de productos
+        const mostrarCuenta = mostrarCuentaConEliminar;
+
+        const agregarPlato = (tipoPlato, id) => {
+            const plato = obtenerOpcionPorID(tipoPlato, id);
             if (plato) {
                 detallesPedido.push({ nombre: plato.nombre, precio: plato.precio });
                 subTotal += plato.precio;
+                mostrarCuenta();
             }
         };
 
-        const obtenerOpcionPorID = (tipoPlato) => {
-            let opcion;
-            do {
-                opcion = prompt(`Ingrese el número de la opción de ${tipoPlato}:\n${obtenerOpcionesPorID(platos[tipoPlato])}`);
-                if (opcion === null) return null;
-                if (!esOpcionValidaPorID(opcion, platos[tipoPlato])) {
-                    alert(`Por favor, ingrese un número de opción de ${tipoPlato} válido.`);
-                }
-            } while (!esOpcionValidaPorID(opcion, platos[tipoPlato]));
-            return platos[tipoPlato].find((plato) => plato.id === parseInt(opcion));
-        };
+        const obtenerOpcionPorID = (tipoPlato, id) => {
+            // Verifica si la categoría existe en el objeto platos
+            if (platos.hasOwnProperty(tipoPlato)) {
+                // Busca la opción con el ID proporcionado en la categoría
+                const opcion = platos[tipoPlato].find((plato) => plato.id === id);
 
-        const obtenerOpcionesPorID = (listaPlatos) => {
-            return listaPlatos.map(({ id, nombre, precio }) => `\n ${id}. ${nombre} .. $${precio.toFixed(2)}`).join("");
-        };
-
-        const esOpcionValidaPorID = (opcion, listaPlatos) => {
-            opcion = parseInt(opcion);
-            return listaPlatos.some((plato) => plato.id === opcion);
+                // Retorna la opción si se encontró, de lo contrario, retorna null
+                return opcion || null;
+            } else {
+                console.error(`La categoría "${tipoPlato}" no existe en el menú.`);
+                return null;
+            }
         };
     }
-
-})
+});
