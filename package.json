@@ -1,0 +1,19 @@
+{
+  "name": "entrega_final_javascript",
+  "version": "1.0.0",
+  "description": "Este proyecto tiene como objetivo desarrollar un sistema para la creación de órdenes en un restaurante, utilizando HTML, CSS y JavaScript. Aquí encontrarás información sobre cómo visualizar el proyecto, su estructura de código y las instrucciones para ejecutarlo localmente.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roger-rd/entrega_final_JS_coderHouse.git"
+  },
+  "author": "Roger Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roger-rd/entrega_final_JS_coderHouse/issues"
+  },
+  "homepage": "https://github.com/roger-rd/entrega_final_JS_coderHouse#readme"
+}

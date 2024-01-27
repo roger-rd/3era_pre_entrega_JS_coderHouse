@@ -1,4 +1,4 @@
-# 3da_preEntrega
+# 3Entrega_final
 
 Este proyecto tiene como objetivo desarrollar un sistema para la creación de órdenes en un restaurante, utilizando HTML, CSS y JavaScript. Aquí encontrarás información sobre cómo visualizar el proyecto, su estructura de código y las instrucciones para ejecutarlo localmente.
 
