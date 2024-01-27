@@ -1,6 +1,7 @@
 // main.js
 import { cargarMenu } from './menu.js';
 import { agregarPlato } from './pedidos.js';
+import { outSesion } from '../btn/cerrar_sesion.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const mesasContainer = document.getElementById('mesas');
@@ -35,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <article class="card boleta">
                 <div class="card-header">
                     <h2>Boleta</h2>
+                    <button id="mostrarBoletaBtn" class="btn btn-black mt-3">Mostrar Boleta</button>
+
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush justify-content-center">
@@ -87,4 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    let logoutBtn = document.getElementById("logoutBtn");
+
+    // Agrega un evento al botón de cerrar sesión
+    logoutBtn.addEventListener("click", outSesion);
 });
