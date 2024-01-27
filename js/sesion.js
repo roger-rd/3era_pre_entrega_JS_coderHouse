@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Define la variable de usuario con correo y contraseña
     let currentUser = {
         email: "test@test.com",
-        password: "asd123"
+        password: "abc123"
     };
 
     let loginForm = document.querySelector(".my-form");
