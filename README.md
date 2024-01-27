@@ -16,7 +16,6 @@ Para explorar y visualizar el proyecto, puedes acceder a la siguiente URL:
 
 ## El código está organizado de la siguiente manera:
 
-Estructura del Proyecto
 El código está estructurado de manera cuidadosa para facilitar su comprensión y mantenimiento. A continuación, se describen los principales componentes:
 
 - Modularidad y Sistema de Vista Controlada:
