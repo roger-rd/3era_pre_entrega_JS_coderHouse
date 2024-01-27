@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Define la variable de usuario con correo y contraseña
+    let currentUser = {
+        email: "test@test.com",
+        password: "asd123"
+    };
+
     let loginForm = document.querySelector(".my-form");
 
     loginForm.addEventListener("submit", function (e) {
@@ -43,11 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function checkUserRegistration(email, password) {
-        // Obtén los datos del usuario almacenados en el localStorage
-        let storedUserData = JSON.parse(localStorage.getItem('user')) || {};
-    
-        // Verifica si las credenciales ingresadas coinciden con las almacenadas
-        return email === storedUserData.email && password === storedUserData.password;
+        // Verifica si las credenciales ingresadas coinciden con las almacenadas en la variable currentUser
+        return email === currentUser.email && password === currentUser.password;
     }
 });
 
