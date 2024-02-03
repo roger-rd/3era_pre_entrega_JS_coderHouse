@@ -10,6 +10,9 @@ export const eliminarProducto = (index, mesaNum) => {
         // Guarda la boleta actualizada en el localStorage
         guardarBoletaEnLocalStorage(mesaNum);
 
+         // Remueve la entrada del localStorage
+         localStorage.removeItem(`boleta-${mesaNum}`);
+         
           Toastify({
             text: "Producto eliminado de la boleta",
             autoClose: 5000,
