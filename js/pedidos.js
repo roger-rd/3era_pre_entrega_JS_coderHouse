@@ -10,11 +10,17 @@ export const eliminarProducto = (index, mesaNum) => {
         // Guarda la boleta actualizada en el localStorage
         guardarBoletaEnLocalStorage(mesaNum);
 
-        Swal.fire({
-            icon:'success',
-            title:'Producto Eliminado',
-            text:'El producto ha sido eliminado de la boleta',
-        });
+          Toastify({
+            text: "Producto eliminado de la boleta",
+            autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              backgroundColor: "#7305055a"
+          }).showToast();
     }
 
 };
@@ -73,11 +79,15 @@ export const agregarPlato = (tipoPlato, id, platos, mesaNum) => {
         guardarBoletaEnLocalStorage(mesaNum);
 
         // Añade un SweetAlert de agregación exitosa
-        Swal.fire({
-            icon: 'success',
-            title: 'Producto agregado',
-            text: 'El producto ha sido agregado a la boleta.',
-        });
+        Toastify({
+            text: "Producto agregado a la boleta",
+            duration: 3000,
+            close: true,
+            gravity: "top-right",
+            position: "right",
+            theme: "light",
+            backgroundColor: "#10d2304b",
+          }).showToast();
     }
 };
 
@@ -109,7 +119,13 @@ export const guardarBoletaEnLocalStorage = (mesaNum) => {
     if (subTotales[mesaNum]) {
         // Convierte el objeto a cadena JSON y guárdalo en el localStorage
         localStorage.setItem(`boleta-${mesaNum}`, JSON.stringify(subTotales[mesaNum]));
+    } else {
+        // Si no hay boleta, elimina la entrada del localStorage
+        localStorage.removeItem(`boleta-${mesaNum}`);
     }
+
+
+
 };
 
 

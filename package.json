@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/roger-rd/entrega_final_JS_coderHouse/issues"
   },
-  "homepage": "https://github.com/roger-rd/entrega_final_JS_coderHouse#readme"
+  "homepage": "https://github.com/roger-rd/entrega_final_JS_coderHouse#readme",
+  "dependencies": {
+    "toastify-js": "^1.12.0"
+  }
 }
