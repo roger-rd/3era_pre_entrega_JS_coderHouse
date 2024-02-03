@@ -11,8 +11,8 @@ export const eliminarProducto = (index, mesaNum) => {
         guardarBoletaEnLocalStorage(mesaNum);
 
          // Remueve la entrada del localStorage
-         localStorage.removeItem(`boleta-${mesaNum}`);
-         
+        //  localStorage.removeItem(`boleta-${mesaNum}`);
+
           Toastify({
             text: "Producto eliminado de la boleta",
             autoClose: 5000,
@@ -25,13 +25,11 @@ export const eliminarProducto = (index, mesaNum) => {
               backgroundColor: "#7305055a"
           }).showToast();
     }
-
 };
 
 export const handleClickEliminar = (index, mesaNum) => {
     eliminarProducto(index, mesaNum);
 };
-
 
 export const mostrarCuentaConEliminar = (mesaNum) => {
     const detallesPedidoContainer = document.getElementById(`detallesPedido-${mesaNum}`);
@@ -40,7 +38,6 @@ export const mostrarCuentaConEliminar = (mesaNum) => {
         console.error(`Elemento detallesPedido-${mesaNum} no encontrado.`);
         return;
     }
-
     detallesPedidoContainer.innerHTML = '';
 
     const ul = document.createElement('ul');
@@ -53,7 +50,6 @@ export const mostrarCuentaConEliminar = (mesaNum) => {
             eliminarBtn.className = 'btn btn-outline-danger btn-sm';
             eliminarBtn.textContent = 'Eliminar';
             eliminarBtn.addEventListener('click', () => handleClickEliminar(index, mesaNum));
-
             li.appendChild(eliminarBtn);
             ul.appendChild(li);
         });
@@ -63,9 +59,8 @@ export const mostrarCuentaConEliminar = (mesaNum) => {
         totalLi.textContent = `Total: $${total}`;
         ul.appendChild(totalLi);
     }
-
     detallesPedidoContainer.appendChild(ul);
-};
+}
 
 export const agregarPlato = (tipoPlato, id, platos, mesaNum) => {
     const plato = obtenerOpcionPorID(tipoPlato, id, platos);
@@ -73,7 +68,6 @@ export const agregarPlato = (tipoPlato, id, platos, mesaNum) => {
         if (!subTotales[mesaNum]) {
             subTotales[mesaNum] = { subTotal: 0, detallesPedido: [] };
         }
-
         subTotales[mesaNum].detallesPedido.push({ nombre: plato.nombre, precio: plato.precio });
         subTotales[mesaNum].subTotal += plato.precio;
         mostrarCuentaConEliminar(mesaNum);
@@ -126,11 +120,7 @@ export const guardarBoletaEnLocalStorage = (mesaNum) => {
         // Si no hay boleta, elimina la entrada del localStorage
         localStorage.removeItem(`boleta-${mesaNum}`);
     }
-
-
-
 };
-
 
 // Luego, puedes cargar los datos almacenados del localStorage cuando la página se carga
 document.addEventListener('DOMContentLoaded', () => {
